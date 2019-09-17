@@ -1,0 +1,18 @@
+
+  <a [routerLink]="[ '/resourcetable']">resourcetable</a>
+
+
+<div>
+  <p>display whole table</p>
+  <button (click)="handleResource()">test</button>
+  <table>
+    <tr>
+      <td *ngFor="let column of columnlist">{{column}}</td>
+    </tr>
+    <tr *ngFor="let row of wholeTable">
+      <td *ngFor="let rowname of columnlist">{{row[rowname]}}</td>
+    </tr>
+  </table>
+</div>
+
+

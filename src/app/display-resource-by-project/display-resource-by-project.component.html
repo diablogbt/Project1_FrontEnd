@@ -1,0 +1,13 @@
+<div>
+  <button (click)="displayTableByProject()">get resource by project</button>
+  <table>
+    <tr>
+      <td *ngFor="let columnname of columnlist">{{columnname}}</td>
+    </tr>
+    <tr *ngFor="let row of resourceListByProject">
+      <td *ngFor="let columnname of columnlist">
+        {{row[columnname]}}
+      </td>
+    </tr>
+  </table>
+</div>
