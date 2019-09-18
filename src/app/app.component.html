@@ -17,6 +17,7 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+
 <div>Helloworld</div>
 <!-- <div style="column-count: 2">
   <div>
@@ -28,10 +29,16 @@
 </div>
  -->
 
+
+<div>
+  <app-resource-whole-table></app-resource-whole-table>
+</div>
+
 <nav>
-  <div>
-    <app-resource-whole-table></app-resource-whole-table>
-  </div>
+  <p><a [routerLink]="[ '/resourcetable']">Resource Table</a></p>
+  <p><a [routerLink]="[ '/userprofile']">User</a></p>
+  <p><a [routerLink]="[ '/projectlist']">Project List</a></p>
+  <p><a [routerLink]="[ '/resourcepage']">Resource Page</a></p>
 </nav>
 
 <router-outlet></router-outlet>

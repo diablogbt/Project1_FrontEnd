@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Model/User';
-import { GetRequestService } from '../service/get-request.service';
+
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,14 +10,28 @@ import { GetRequestService } from '../service/get-request.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: User;
+  user: User = new User();
+  uname = 'abc';
 
-  userRequestURL = 'localhost:8080/Project1/user/profile';
-  constructor(private request: GetRequestService) { }
+  requestoption = {headers: new HttpHeaders(
+    {contentType: 'text/plain', responseType: 'JSON'}
+    )};
+
+  userRequestURL = 'http://localhost:8080/Project1/user/profile';
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.getUser();
   }
 
   getUser() {
+    this.http.post<User>(this.userRequestURL, this.uname, {responseType: 'json'})
+      .subscribe(
+        (response: User) => {
+          this.user = response;
+          console.log(this.user);
+        },
+        error => console.log(error)
+    );
   }
 }

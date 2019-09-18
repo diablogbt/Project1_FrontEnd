@@ -1,0 +1,17 @@
+
+
+<p>project-selctor</p>
+<div>
+  <button (click)="getProjectList()">test</button>
+  <select>
+    <option *ngFor="let proj of projectList" value="proj">
+      {{proj['project_name']}}
+    </option>
+  </select>
+
+  <!-- <p-dropdown [options]="projectList" [(ngModel)]="selectedProject"
+    placeholder="Select Project" optionLabel="project_name">
+  </p-dropdown> -->
+
+  <!-- <p>Selected Project: {{selectedProject ? selectedProject.project_name : 'none'}}</p> -->
+</div>

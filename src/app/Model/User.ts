@@ -1,7 +1,9 @@
 
-export interface User {
-  id: number;
-  uname: string;
-  pass: string;
-  register_date: string;
+export class User {
+  id = 0;
+  uname = '';
+  pass = '';
+  register_date = '';
+
+  constructor() { }
 }

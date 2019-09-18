@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<p-toolbar>
+    <div class="ui-toolbar-group-left">
+        <div class="ui-g-12 ui-md-4">
+            <div class="ui-inputgroup">
+                <input type="text" pInputText placeholder="Keyword" [(ngModel)]="filterwords">
+                <button pButton type="button" icon="pi pi-search" class="ui-button-one" (click)="filterByKeyWord()"></button>
+            </div>
+        </div>
+    </div>
+
+</p-toolbar>
+
+
+<p-table [value]="filteredResourceList">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Resource Name</th>
+            <th>Resource Code</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-filteredResource>
+        <tr>
+            <td>{{filteredResource.name}}</td>
+            <td>{{filteredResource.cost_code}}</td>
+        </tr>
+    </ng-template>
+</p-table>
