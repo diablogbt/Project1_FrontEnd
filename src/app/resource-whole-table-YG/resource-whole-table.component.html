@@ -1,0 +1,27 @@
+
+<html>
+  <body>
+    <div id="container">
+        <table id="formula">
+          <tr>
+            <th id="header" colspan="100%">QUANTITY SURVEY</th>
+          </tr>
+          <tr>
+            <th *ngFor="let column of columnlist">{{column | uppercase}}</th>
+          </tr>
+          <tr *ngFor="let row of wholeTableByProject">
+            <td *ngFor="let rowname of columnlist">{{row[rowname]}}</td>
+          </tr>
+        </table>
+    </div>
+    <div id="editFormula">
+      <!-- <p>Edit Quantity Survey Template</p> -->
+      <nav>
+      <a  routerLink="/checkBox">Edit Quantity Survey Template</a>
+      <input type="submit" value="Submit" onChange="this.form.submit()">
+      </nav>
+      <router-outlet></router-outlet>
+
+    </div>
+  </body>
+</html>

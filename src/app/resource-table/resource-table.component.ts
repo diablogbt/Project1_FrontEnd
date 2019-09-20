@@ -21,13 +21,13 @@ export class ResourceTableComponent implements OnInit {
   requestResourceAll = 'http://localhost:8080/Project1/res/displayResources';
 
   ngOnInit(): void {
+    this.displayTableAll();
   }
 
   displayTableAll() {
     this.getservice.getResponse(this.requestResourceAll).subscribe(
       (data: Resource[]) => {
         this.resourceListAll = data;
-        console.log(this.columnlist);
       },
       (error) => this.errorMessage = error
     );

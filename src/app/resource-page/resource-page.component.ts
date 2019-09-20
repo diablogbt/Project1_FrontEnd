@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResourceList } from '../resource-page/ResourceList';
 import { ServiceService } from '../resource-page/service.service';
 import { MenuItem } from 'primeng/api';
+import { DisplayService } from '../service/display.service';
 // import { MessageService } from '../resource-page/message.service';
 
 @Component ({
@@ -11,7 +12,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class ResourcePageComponent implements OnInit {
 
-  constructor(private service: ServiceService) {
+  constructor(private service: ServiceService, private displayservice: DisplayService) {
 
   }
 
@@ -27,7 +28,7 @@ export class ResourcePageComponent implements OnInit {
 
   errorMessage: string;
 
-  requestResourceAll = 'http://192.168.1.182:8080/Project1/res/displayResources';
+  requestResourceAll = 'http://localhost:8080/Project1/res/displayResources';
 
   // add Row
   newResource: boolean;
@@ -57,17 +58,9 @@ export class ResourcePageComponent implements OnInit {
     ];
   }
 
-  filterByKeyWord() {
-    if (!this.filterwords || this.filterwords.replace(/\s/g, '') === '') {
-      this.filteredResourceList = this.myResourceList;
-    } else {
-      this.filteredResourceList = [];
-      for (let resSearch of this.myResourceList) {
-        if (resSearch.cost_code.search(this.filterwords) >= 0 ||
-          resSearch.name.search(this.filterwords) >= 0) {
-          this.filteredResourceList.push(resSearch);
-        }
-      }
-    }
+  filter(){
+    this.filteredResourceList =
+      this.displayservice.filterByKeyWord(this.myResourceList, this.filterwords);
   }
+
 }

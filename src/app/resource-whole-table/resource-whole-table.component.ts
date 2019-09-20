@@ -3,7 +3,7 @@ import { GetRequestService } from '../service/get-request.service';
 import { Resource } from '../Model/Resource';
 import { DisplayService } from '../service/display.service';
 
-@Component({
+@Component ({
   selector: 'app-resource-whole-table',
   templateUrl: './resource-whole-table.component.html',
   styleUrls: ['./resource-whole-table.component.css']
@@ -24,7 +24,7 @@ export class ResourceWholeTableComponent implements OnInit {
     this.getColumn();
   }
 
-  getColumn(){
+  getColumn() {
     this.getservice.getResponse(this.requestColumnURL).subscribe(
       (data: string[]) => {
         this.columnlist = data;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Resource } from '../Model/Resource';
 import { GetRequestService } from '../service/get-request.service';
 
@@ -9,6 +9,8 @@ import { GetRequestService } from '../service/get-request.service';
 })
 export class DisplayResourceByProjectComponent implements OnInit {
 
+  @Input() id = 1;
+
   constructor(private getservice: GetRequestService) { }
 
   resourceListByProject: Resource[];
@@ -16,9 +18,23 @@ export class DisplayResourceByProjectComponent implements OnInit {
 
   errorMessage: string;
   columnlist: string[] = ['cost_code', 'name'];
-  id = 1;
+
 
   ngOnInit() {
+    this.displayTableByProject();
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    // Add '${implements OnChanges}' to the class.
+    for(let propname in changes) {
+      if(propname === 'pid') {
+        this.id = changes[propname].currentValue;
+      }
+    }
+    if (this.id) {
+      this.displayTableByProject(this.id);
+    }
   }
 
   displayTableByProject(id?: number) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { RequestService } from '../service/request.service';
 import { ProjectList } from '../Model/ProjectList';
 import { GetRequestService } from '../service/get-request.service';
@@ -6,9 +6,10 @@ import { GetRequestService } from '../service/get-request.service';
 @Component({
   selector: 'app-project-selctor',
   templateUrl: './project-selctor.component.html',
-  // styleUrls: ['./project-selctor.component.css']
+  styleUrls: ['./project-selctor.component.css']
 })
 export class ProjectSelctorComponent implements OnInit {
+  @Output() pidChange = new EventEmitter<number>();
 
   requestProjectURL = 'http://localhost:8080/Project1/project/display';
   projectList: ProjectList[];
@@ -27,4 +28,7 @@ export class ProjectSelctorComponent implements OnInit {
     );
   }
 
+  updateProjectId() {
+    this.pidChange.emit(this.selectedProject.pid);
+  }
 }

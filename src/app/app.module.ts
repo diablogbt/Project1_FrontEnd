@@ -1,21 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DisplayResourceByProjectComponent } from './display-resource-by-project/display-resource-by-project.component';
 import { GetResourceRequestComponent } from './get-resource-request/get-resource-request.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { ResourceTableComponent } from './resource-table/resource-table.component';
-import { ResourceWholeTableComponent } from './resource-whole-table/resource-whole-table.component';
+// import { ResourceWholeTableComponent } from './resource-whole-table/resource-whole-table.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ProjectSelctorComponent } from './project-selctor/project-selctor.component';
+
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
-import { ResourcePageComponent } from './resource-page/resource-page.component';
-
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {ToolbarModule} from 'primeng/toolbar';
 import {SidebarModule} from 'primeng/sidebar';
@@ -23,6 +23,11 @@ import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {TableModule} from 'primeng/table';
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import { ProjectPageComponent } from './project-page/project-page.component';
+
+import { ResourcePageComponent } from './resource-page/resource-page.component';
+import { ResourceWholeTableComponent } from './resource-whole-table-YG/resource-whole-table.component';
+import { TestPostComponent } from './test-post/test-post.component';
 
 
 @NgModule({
@@ -35,6 +40,8 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     BrowserModule,
     BrowserAnimationsModule,
     ButtonModule,
+    CommonModule,
+    ReactiveFormsModule,
 
     SplitButtonModule,
     ToolbarModule,
@@ -48,10 +55,15 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     DisplayResourceByProjectComponent,
     GetResourceRequestComponent,
     ResourceTableComponent,
-    ResourceWholeTableComponent,
+    // ResourceWholeTableComponent,
     UserProfileComponent,
     ProjectSelctorComponent,
-    ResourcePageComponent
+    ResourcePageComponent,
+    ProjectPageComponent,
+
+    ResourceWholeTableComponent,
+
+    TestPostComponent
   ],
 
   providers: [],
