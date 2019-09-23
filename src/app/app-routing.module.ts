@@ -5,7 +5,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ProjectSelctorComponent } from './project-selctor/project-selctor.component';
 import { ResourcePageComponent } from './resource-page/resource-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
-import { ResourceWholeTableComponent } from './resource-whole-table-YG/resource-whole-table.component';
+import { YGResourceWholeTableComponent } from './resource-whole-table-YG/resource-whole-table.component';
+import { ResourceWholeTableComponent } from './resource-whole-table/resource-whole-table.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'projectlist', component: ProjectSelctorComponent},
   {path: 'resourcepage', component: ResourcePageComponent},
   {path: 'projectpage', component: ProjectPageComponent},
-  {path: 'resourcewholetable', component: ResourceWholeTableComponent}
+  {path: 'resourcewholetable', component: ResourceWholeTableComponent},
+  {path: 'resourcewholetableYG', component: YGResourceWholeTableComponent}
 ];
 
 @NgModule({

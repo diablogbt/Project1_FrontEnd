@@ -10,9 +10,12 @@ import { AppComponent } from './app.component';
 import { DisplayResourceByProjectComponent } from './display-resource-by-project/display-resource-by-project.component';
 import { GetResourceRequestComponent } from './get-resource-request/get-resource-request.component';
 import { ResourceTableComponent } from './resource-table/resource-table.component';
-// import { ResourceWholeTableComponent } from './resource-whole-table/resource-whole-table.component';
+import { ResourceWholeTableComponent } from './resource-whole-table/resource-whole-table.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ProjectSelctorComponent } from './project-selctor/project-selctor.component';
+import { ResourcePageComponent } from './resource-page/resource-page.component';
+import { YGResourceWholeTableComponent } from './resource-whole-table-YG/resource-whole-table.component';
+import { TestPostComponent } from './test-post/test-post.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
@@ -25,9 +28,7 @@ import {TableModule} from 'primeng/table';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import { ProjectPageComponent } from './project-page/project-page.component';
 
-import { ResourcePageComponent } from './resource-page/resource-page.component';
-import { ResourceWholeTableComponent } from './resource-whole-table-YG/resource-whole-table.component';
-import { TestPostComponent } from './test-post/test-post.component';
+
 
 
 @NgModule({
@@ -55,13 +56,13 @@ import { TestPostComponent } from './test-post/test-post.component';
     DisplayResourceByProjectComponent,
     GetResourceRequestComponent,
     ResourceTableComponent,
-    // ResourceWholeTableComponent,
+    ResourceWholeTableComponent,
     UserProfileComponent,
     ProjectSelctorComponent,
     ResourcePageComponent,
     ProjectPageComponent,
 
-    ResourceWholeTableComponent,
+    YGResourceWholeTableComponent,
 
     TestPostComponent
   ],

@@ -17,8 +17,8 @@ export class TestPostComponent implements OnInit {
   requestURL = 'http://localhost:8080/Project1/test/getList';
 
   sendPost() {
-    let
-    this.http.post(this.requestURL, this.uname, {responseType: 'json'})
+    let ulist = [{id: 1, uname: 'abcd', pass: 'nonon'},{id: 2, uname: 'cue', pass: 'finvc'}];
+    this.http.post(this.requestURL, ulist, {responseType: 'json'})
     .subscribe(
       (response: string) => {
         console.log(response);

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceWholeTableComponent } from './resource-whole-table.component';
+import { YGResourceWholeTableComponent } from './resource-whole-table.component';
 
-describe('ResourceWholeTableComponent', () => {
-  let component: ResourceWholeTableComponent;
-  let fixture: ComponentFixture<ResourceWholeTableComponent>;
+describe('YGResourceWholeTableComponent', () => {
+  let component: YGResourceWholeTableComponent;
+  let fixture: ComponentFixture<YGResourceWholeTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceWholeTableComponent ]
+      declarations: [ YGResourceWholeTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceWholeTableComponent);
+    fixture = TestBed.createComponent(YGResourceWholeTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,7 @@
 
 <html>
   <body>
+    <app-project-selctor (pidChange)="dealPidChange($event)"></app-project-selctor>
     <div id="container">
         <table id="formula">
           <tr>
@@ -9,7 +10,7 @@
           <tr>
             <th *ngFor="let column of columnlist">{{column | uppercase}}</th>
           </tr>
-          <tr *ngFor="let row of wholeTableByProject">
+          <tr *ngFor="let row of displayedWholeTableByProject">
             <td *ngFor="let rowname of columnlist">{{row[rowname]}}</td>
           </tr>
         </table>

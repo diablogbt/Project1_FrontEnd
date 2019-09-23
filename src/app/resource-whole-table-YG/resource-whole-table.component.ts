@@ -5,13 +5,13 @@ import { Subscription } from 'rxjs';
 import { ProjectList } from '../Model/ProjectList';
 import { ResourceList } from '../resource-page/ResourceList';
 
-@Component ({
-  selector: 'app-resource-whole-table',
+@Component({
+  selector: 'app-resource-whole-table-YG',
   templateUrl: './resource-whole-table.component.html',
   styleUrls: ['./resource-whole-table.component.css']
 })
 
-export class ResourceWholeTableComponent implements OnInit {
+export class YGResourceWholeTableComponent implements OnInit {
   @Input() pid = 1;
 
   constructor(private getservice: GetResourceRequestService, private getdeliver: DeliverTableService) { }
@@ -21,18 +21,22 @@ export class ResourceWholeTableComponent implements OnInit {
   columnlist: string[];
   currentPid: number;
   wholeTable: object[] = [];
-  wholeTableByProject: object[] = [];
+  wholeTableByProject: {pid: number, wholetable: object[]}[] = [];
+  wholeTableByProjectElement: object[] = [];
+  displayedWholeTableByProject: object[] = [];
   subscription: Subscription;
   finalTable: string[];
 
   errorMessage: string;
-  requestColumnURL = 'http://192.168.1.172:8080/Project1/res/getColumnNames';
-  requestWholeURL = 'http://192.168.1.172:8080/Project1/res/displayWhole';
-  requestProjectURL = 'http://192.168.1.172:8080/Project1/project/display';
+  targetURL = 'http://localhost:8080/Project1';
+  requestColumnURL = this.targetURL + '/res/getColumnNames';
+  requestWholeURL = this.targetURL + '/res/displayWhole';
+  requestProjectURL = this.targetURL + '/project/display';
     ngOnInit(){
         this.subscription = this.getdeliver.deliverAnnounced$.subscribe(
-          table => {console.log(table); this.finalTable = table;});
+          table => {this.finalTable = table;});
         this.getColumn();
+        this.displayedWholeTableByProject = this.wholeTable;
   }
 
   getColumn(){
@@ -50,25 +54,23 @@ export class ResourceWholeTableComponent implements OnInit {
     this.getservice.getResponse(this.requestProjectURL).subscribe(
       (data: ProjectList[]) => {
         this.projectList = data;
-        console.log(this.projectList);
+        this.makeWholeByProject();
       }
     );
   }
 
   makeWholeByProject() {
-    if(this.currentPid === undefined) {
-      this.wholeTableByProject = this.wholeTable;
-    } else {
-      let currentProject = this.projectList.find(proj => proj.pid === this.currentPid);
-      let listCostCode = currentProject.resources;
+    for(let proj of this.projectList){
+      if(proj.pid === 0) {continue; }
 
-      this.wholeTableByProject = [];
-      for(let codes of listCostCode){
-        let row = this.wholeTable.find(row => row['cost_code'] === codes['cost_code']);
+      let thistable: object[] = [];
+      for(let projcode of proj.resources) {
+        let row = this.wholeTable.find(thisrow => thisrow['cost_code'] === projcode['cost_code']);
         if(row) {
-          this.wholeTableByProject.push(row);
+          thistable.push(row);
         }
       }
+      this.wholeTableByProject.push({pid: proj.pid, wholetable: thistable});
     }
   }
 
@@ -79,7 +81,6 @@ export class ResourceWholeTableComponent implements OnInit {
         // console.log(this.resourceList);
         this.makeTable();
         this.getProject();
-        this.makeWholeByProject();
       },
       (error) => {this.errorMessage = error; }
     );
@@ -101,5 +102,14 @@ export class ResourceWholeTableComponent implements OnInit {
     }
   }
 
+  dealPidChange(proj: ProjectList) {
+    if(!proj) {
+      this.displayedWholeTableByProject = this.wholeTable;
+    }
+    else {
+      this.displayedWholeTableByProject = this.wholeTableByProject.find(projtable => projtable.pid === proj.pid).wholetable;
+    }
+
+  }
 
 }

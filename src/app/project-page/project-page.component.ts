@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectList } from '../Model/ProjectList';
 
 @Component({
   selector: 'app-project-page',
@@ -14,7 +15,7 @@ export class ProjectPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  dealPidChange(pid: number) {
-    this.pid = pid;
+  dealPidChange(proj: ProjectList) {
+    this.pid = proj.pid;
   }
 }
