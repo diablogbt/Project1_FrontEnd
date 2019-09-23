@@ -28,8 +28,10 @@ export class ProjectSelctorComponent implements OnInit {
       (data: ProjectList[]) => {
         this.projectList = data;
         this.displayedProjectList = data;
-        this.displayedProjectList = this.displayedProjectList.filter(proj => proj.pid !== 0);
-        console.log(this.displayedProjectList);
+        // this.displayedProjectList = this.displayedProjectList.filter(proj => proj.pid !== 0);
+        this.displayedProjectList = data;
+        this.displayedProjectList.find(proj => proj.pid === 0).project_name = 'all resources';
+        // console.log(this.displayedProjectList);
       }
     );
   }

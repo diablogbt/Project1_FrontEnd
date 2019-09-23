@@ -9,9 +9,6 @@ export class DisplayService {
   makeTable(columnlist, resourceList, displayResult){
     for(let row of resourceList){
       let rowcnt: object[] = [];
-      for(let columnname of columnlist){
-        rowcnt.push({columnname: ''});
-      }
 
       rowcnt['cost_code'] = row.cost_code;
       rowcnt['name'] = row.name;

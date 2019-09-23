@@ -18,7 +18,8 @@ export class TestPostComponent implements OnInit {
 
   sendPost() {
     let ulist = [{id: 1, uname: 'abcd', pass: 'nonon'},{id: 2, uname: 'cue', pass: 'finvc'}];
-    this.http.post(this.requestURL, ulist, {responseType: 'json'})
+    console.log(ulist);
+    this.http.post(this.requestURL, ulist, {responseType: 'text'})
     .subscribe(
       (response: string) => {
         console.log(response);

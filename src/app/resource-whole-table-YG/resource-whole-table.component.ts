@@ -4,6 +4,7 @@ import { Resource } from '../Model/Resource';
 import { Subscription } from 'rxjs';
 import { ProjectList } from '../Model/ProjectList';
 import { ResourceList } from '../resource-page/ResourceList';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-resource-whole-table-YG',
@@ -18,12 +19,14 @@ export class YGResourceWholeTableComponent implements OnInit {
 
   projectList: ProjectList[];
   resourceList: Resource[];
-  columnlist: string[];
+  allColumnList: string[];
+  displayedColumnList: string[];
   currentPid: number;
   wholeTable: object[] = [];
-  wholeTableByProject: {pid: number, wholetable: object[]}[] = [];
+  wholeTableByProject: {pid: number, columns: object[], wholetable: object[]}[] = [];
   wholeTableByProjectElement: object[] = [];
   displayedWholeTableByProject: object[] = [];
+
   subscription: Subscription;
   finalTable: string[];
 
@@ -32,17 +35,21 @@ export class YGResourceWholeTableComponent implements OnInit {
   requestColumnURL = this.targetURL + '/res/getColumnNames';
   requestWholeURL = this.targetURL + '/res/displayWhole';
   requestProjectURL = this.targetURL + '/project/display';
-    ngOnInit(){
+    ngOnInit() {
         this.subscription = this.getdeliver.deliverAnnounced$.subscribe(
-          table => {this.finalTable = table;});
+          table => {this.finalTable = table; });
         this.getColumn();
-        this.displayedWholeTableByProject = this.wholeTable;
   }
 
-  getColumn(){
+  setGlobalProperties(){
+    this.displayedColumnList = this.allColumnList;
+    this.displayedWholeTableByProject = this.wholeTable;
+  }
+
+  getColumn() {
     this.getservice.getResponse(this.requestColumnURL).subscribe(
       (data: string[]) => {
-        this.columnlist = data;
+        this.allColumnList = data;
         // console.log(this.columnlist);
         this.getWhole();
       },
@@ -50,31 +57,34 @@ export class YGResourceWholeTableComponent implements OnInit {
     );
   }
 
-  getProject(){
+  getProject() {
     this.getservice.getResponse(this.requestProjectURL).subscribe(
       (data: ProjectList[]) => {
         this.projectList = data;
         this.makeWholeByProject();
+        this.setGlobalProperties();
       }
     );
   }
 
   makeWholeByProject() {
-    for(let proj of this.projectList){
-      if(proj.pid === 0) {continue; }
+    for (const proj of this.projectList) {
 
-      let thistable: object[] = [];
-      for(let projcode of proj.resources) {
-        let row = this.wholeTable.find(thisrow => thisrow['cost_code'] === projcode['cost_code']);
-        if(row) {
+      const thistable: object[] = [];
+      for (const projcode of proj.resources) {
+        const row = this.wholeTable.find(thisrow => thisrow['cost_code'] === projcode.cost_code);
+        if (row) {
           thistable.push(row);
         }
       }
-      this.wholeTableByProject.push({pid: proj.pid, wholetable: thistable});
+
+      const columns = proj.columns;
+
+      this.wholeTableByProject.push({pid: proj.pid, columns, wholetable: thistable});
     }
   }
 
-  getWhole(){
+  getWhole() {
     this.getservice.getResponse(this.requestWholeURL).subscribe(
       (data: Resource[]) => {
         this.resourceList = data;
@@ -86,15 +96,13 @@ export class YGResourceWholeTableComponent implements OnInit {
     );
   }
 
-  makeTable(){
-    for(let row of this.resourceList){
-      let rowcnt: object[] = [];
-      for(let columnname of this.columnlist){
-        rowcnt.push({columnname: ''});
-      }
+  makeTable() {
+    for (const row of this.resourceList) {
+      const rowcnt: object[] = [];
+
       rowcnt['name'] = row.name;
       rowcnt['cost_code'] = row.cost_code;
-      for(let columnpair of row.columns){
+      for (const columnpair of row.columns) {
         rowcnt[columnpair[0]] = columnpair[1];
       }
 
@@ -103,11 +111,16 @@ export class YGResourceWholeTableComponent implements OnInit {
   }
 
   dealPidChange(proj: ProjectList) {
-    if(!proj) {
+    if (!proj || proj.pid == 0) {
+      this.displayedColumnList = this.allColumnList;
       this.displayedWholeTableByProject = this.wholeTable;
-    }
-    else {
-      this.displayedWholeTableByProject = this.wholeTableByProject.find(projtable => projtable.pid === proj.pid).wholetable;
+    } else {
+      let displayedContent = this.wholeTableByProject.find(projtable => projtable.pid === proj.pid);
+      let commonContent = this.wholeTableByProject.find(projtable => projtable.pid === 0).columns.map(element => element['column_name']);
+      this.displayedWholeTableByProject = displayedContent.wholetable;
+      this.displayedColumnList = ['cost_code', 'name'];
+      this.displayedColumnList = this.displayedColumnList.concat(commonContent)
+        .concat(displayedContent.columns.map(element => element['column_name']));
     }
 
   }
