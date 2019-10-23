@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GetRequestService } from '../service/get-request.service';
 import { Resource } from '../Model/Resource';
+import { DeliverTableService } from '../service/deliver-table.service';
+import { ResourceList } from '../resource-page/ResourceList';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,24 +14,23 @@ import { Resource } from '../Model/Resource';
 })
 export class ResourceTableComponent implements OnInit {
 
-  constructor(private getservice: GetRequestService) { }
+  constructor(private http:HttpClient, private deliverservice: DeliverTableService) { }
 
-
+  subs: Subscription;
   resourceListAll: Resource[];
   columnlist: string[] = ['cost_code', 'name'];
 
   errorMessage: string;
-
-  requestResourceAll = 'http://localhost:8080/Project1/res/displayResources';
 
   ngOnInit(): void {
     this.displayTableAll();
   }
 
   displayTableAll() {
-    this.getservice.getResponse(this.requestResourceAll).subscribe(
+    this.subs = this.deliverservice.deliverAnnounced$.subscribe(
       (data: Resource[]) => {
         this.resourceListAll = data;
+        console.log(this.resourceListAll);
       },
       (error) => this.errorMessage = error
     );

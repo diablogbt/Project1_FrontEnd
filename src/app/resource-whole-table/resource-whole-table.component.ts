@@ -40,6 +40,7 @@ export class ResourceWholeTableComponent implements OnInit {
       (data: Resource[]) => {
         this.resourceList = data;
         // console.log(this.resourceList);
+        console.log(this.resourceList);
         this.displayservice.makeTable(this.columnlist,this.resourceList,this.wholeTable);
       },
       (error) => {this.errorMessage = error; }

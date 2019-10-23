@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'resourcepage', component: ResourcePageComponent},
   {path: 'projectpage', component: ProjectPageComponent},
   {path: 'resourcewholetable', component: ResourceWholeTableComponent},
-  {path: 'resourcewholetableYG', component: YGResourceWholeTableComponent}
+  {path: 'resourcewholetableYG', component: YGResourceWholeTableComponent},
 ];
 
 @NgModule({

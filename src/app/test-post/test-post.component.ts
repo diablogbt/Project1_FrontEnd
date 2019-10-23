@@ -14,12 +14,13 @@ export class TestPostComponent implements OnInit {
   ngOnInit() {
   }
 
-  requestURL = 'http://localhost:8080/Project1/test/getList';
+  requestURL = 'http://localhost:8080/Project1/test/getResList';
 
   sendPost() {
     let ulist = [{id: 1, uname: 'abcd', pass: 'nonon'},{id: 2, uname: 'cue', pass: 'finvc'}];
-    console.log(ulist);
-    this.http.post(this.requestURL, ulist, {responseType: 'text'})
+    let rlist = [{name: 'my my res2', cost_code: '00 00 +2', columns: [{0: "note", 1: "noway"},{0: "comment", 1: "tisalittletrouble"}]}];
+    console.log(rlist);
+    this.http.post(this.requestURL, rlist, {responseType: 'text'})
     .subscribe(
       (response: string) => {
         console.log(response);

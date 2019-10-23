@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GetResourceRequestService, DeliverTableService } from '../service/get-resource-request.service';
+import { GetResourceRequestService} from '../service/get-resource-request.service';
 import { Resource } from '../Model/Resource';
 import { Subscription } from 'rxjs';
 import { ProjectList } from '../Model/ProjectList';
 import { ResourceList } from '../resource-page/ResourceList';
 import { element } from 'protractor';
+import { DeliverTableService } from '../service/deliver-table.service';
 
 @Component({
   selector: 'app-resource-whole-table-YG',

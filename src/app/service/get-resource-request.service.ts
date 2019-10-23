@@ -21,23 +21,5 @@ export class GetResourceRequestService {
 
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DeliverTableService {
-  private resultTable = new BehaviorSubject([]);
-  private colName = new BehaviorSubject([]);
-
-  deliverAnnounced$ = this.resultTable.asObservable();
-  deleverCol$ = this.colName.asObservable();
-
-  announceDeliver(table){
-    this.resultTable.next(table);
-  }
-  colDeliver(colList) {
-    this.colName.next(colList);
-  }
-}
-
 
 
